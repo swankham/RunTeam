@@ -38,9 +38,5 @@
     <ProjectReference Include="..\RunTeam.Infrastructure.Shared\RunTeam.Infrastructure.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\v1\" />
-  </ItemGroup>
-
 
 </Project>

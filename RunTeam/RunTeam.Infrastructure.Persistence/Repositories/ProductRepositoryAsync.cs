@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace RunTeam.Infrastructure.Persistence.Repositories
 {
@@ -19,10 +20,15 @@ namespace RunTeam.Infrastructure.Persistence.Repositories
             _products = dbContext.Set<Product>();
         }
 
-        public Task<bool> IsUniqueBarcodeAsync(string barcode)
+        public async Task<IReadOnlyList<Product>> GetByEventIdAsync(int eventId)
+        {
+            return await _products.Where(x => x.EventId == eventId).ToListAsync();
+        }
+
+        public Task<bool> IsUniqueNameAsync(string name)
         {
             return _products
-                .AllAsync(p => p.Barcode != barcode);
+                .AllAsync(p => p.Name != name);
         }
     }
 }

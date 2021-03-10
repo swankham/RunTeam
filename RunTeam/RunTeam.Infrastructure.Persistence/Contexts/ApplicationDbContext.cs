@@ -28,6 +28,7 @@ namespace RunTeam.Infrastructure.Persistence.Contexts
         public DbSet<ContactAddress> ContactAddress { get; set; }
         public DbSet<MedicalInfo> MedicalInfos { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<EventDay> Events { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

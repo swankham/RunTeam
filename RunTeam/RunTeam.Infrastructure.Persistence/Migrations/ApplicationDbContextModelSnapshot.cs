@@ -29,7 +29,7 @@ namespace RunTeam.Infrastructure.Persistence.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Country")
+                    b.Property<int>("CountryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
@@ -53,7 +53,7 @@ namespace RunTeam.Infrastructure.Persistence.Migrations
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Privince")
+                    b.Property<string>("Province")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
@@ -92,6 +92,63 @@ namespace RunTeam.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
+                });
+
+            modelBuilder.Entity("RunTeam.Domain.Entities.EventDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EnableFlag")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("EventCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EventEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EventName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventOwner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EventStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("OnlineFlag")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("RegistrationEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("RegistrationStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RegistrationStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("RunTeam.Domain.Entities.MedicalInfo", b =>
@@ -203,17 +260,32 @@ namespace RunTeam.Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Barcode")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("CustomerOrderFlag")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("CutOffTimeMin")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EnableFlag")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("EndActiveDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemCatalogId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
@@ -224,8 +296,38 @@ namespace RunTeam.Infrastructure.Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Rate")
+                    b.Property<decimal>("PricePerUnit")
                         .HasColumnType("decimal(18,6)");
+
+                    b.Property<string>("PrimaryUomCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RegistrationStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Segment1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Segment2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Segment3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Segment4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Segment5")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ServiceItemFlag")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShippableItemFlag")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("StartActiveDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

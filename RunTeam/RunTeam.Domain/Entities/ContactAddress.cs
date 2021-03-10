@@ -9,8 +9,8 @@ namespace RunTeam.Domain.Entities
     {
         public string UserId { get; set; }
         public string Address { get; set; }
-        public string Privince { get; set; }
-        public int Country { get; set; }
+        public string Province { get; set; }
+        public int CountryId { get; set; }
         public string Phone { get; set; }
         public string PostalCode { get; set; }
         public string EmailAddress { get; set; }

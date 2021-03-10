@@ -15,7 +15,23 @@ namespace RunTeam.Application.Features.Products.Commands.UpdateProduct
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public decimal Rate { get; set; }
+        public bool EnableFlag { get; set; }
+        public DateTime StartActiveDate { get; set; }
+        public DateTime EndActiveDate { get; set; }
+        public int CutOffTimeMin { get; set; }
+        public string Segment1 { get; set; }
+        public string Segment2 { get; set; }
+        public string Segment3 { get; set; }
+        public string Segment4 { get; set; }
+        public string Segment5 { get; set; }
+        public bool ShippableItemFlag { get; set; }
+        public bool CustomerOrderFlag { get; set; }
+        public bool ServiceItemFlag { get; set; }
+        public int ItemCatalogId { get; set; }
+        public decimal PricePerUnit { get; set; }
+        public string PrimaryUomCode { get; set; }
+        public int RegistrationStatus { get; set; }
+        public int EventId { get; set; }
         public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Response<int>>
         {
             private readonly IProductRepositoryAsync _productRepository;
@@ -34,8 +50,25 @@ namespace RunTeam.Application.Features.Products.Commands.UpdateProduct
                 else
                 {
                     product.Name = command.Name;
-                    product.Rate = command.Rate;
                     product.Description = command.Description;
+                    product.EnableFlag = command.EnableFlag;
+                    product.StartActiveDate = command.StartActiveDate;
+                    product.EndActiveDate = command.EndActiveDate;
+                    product.CutOffTimeMin = command.CutOffTimeMin;
+                    product.Segment1 = command.Segment1;
+                    product.Segment2 = command.Segment2;
+                    product.Segment3 = command.Segment3;
+                    product.Segment4 = command.Segment4;
+                    product.Segment5 = command.Segment5;
+                    product.ShippableItemFlag = command.ShippableItemFlag;
+                    product.CustomerOrderFlag = command.CustomerOrderFlag;
+                    product.ServiceItemFlag = command.ServiceItemFlag;
+                    product.ItemCatalogId = command.ItemCatalogId;
+                    product.PricePerUnit = command.PricePerUnit;
+                    product.PrimaryUomCode = command.PrimaryUomCode;
+                    product.RegistrationStatus = command.RegistrationStatus;
+                    product.EventId = command.EventId;
+
                     await _productRepository.UpdateAsync(product);
                     return new Response<int>(product.Id);
                 }
