@@ -1,5 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
+
 import {
   CButton,
   CCard,
@@ -13,10 +16,39 @@ import {
   CInputGroupPrepend,
   CInputGroupText,
   CRow
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+} from '@coreui/react';
+import CIcon from '@coreui/icons-react';
+import { loginUser } from './../../../redux/actions/authActionCreators';
 
-const Login = () => {
+const Login = ({ dispatchLoginAction }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState({ email: false, password: false });
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    if (isFormInvalid()) updateErrorFlags();
+    else dispatchLoginAction(email, password,
+      () => toast.success('Logged in successfully'),
+      (message) => toast.error(`Error: ${message}`))
+  };
+
+  const handleCancelForm = e => {
+    e.preventDefault();
+    setEmail('');
+    setPassword('');
+    setError({ email: false, password: false });
+  };
+
+  const isFormInvalid = () => (!email || !password);
+
+  const updateErrorFlags = () => {
+    const errObj = { email: false, password: false };
+    if (!email.trim()) errObj.email = true;
+    if (!password.trim()) errObj.password = true;
+    setError(errObj);
+  };
+
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -34,7 +66,12 @@ const Login = () => {
                           <CIcon name="cil-user" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" autoComplete="username" />
+                      <CInput
+                        type="email"
+                        placeholder="Username"
+                        autoComplete="username"
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email} />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -42,11 +79,17 @@ const Login = () => {
                           <CIcon name="cil-lock-locked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" autoComplete="current-password" />
+                      <CInput
+                        type="password"
+                        placeholder="Password"
+                        autoComplete="current-password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password} />
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton color="primary" className="px-4">Login</CButton>
+                        {/* <CButton type="submit" color="primary" className="px-4">Login</CButton> */}
+                        <CButton type="submit" size="sm" color="primary" onClick={handleOnSubmit}><CIcon name="cil-scrubber" /> Login</CButton>
                       </CCol>
                       <CCol xs="6" className="text-right">
                         <CButton color="link" className="px-0">Forgot password?</CButton>
@@ -75,4 +118,9 @@ const Login = () => {
   )
 }
 
-export default Login
+const mapDispatchToProps = dispatch => ({
+  dispatchLoginAction: (email, password, onSuccess, onError) =>
+    dispatch(loginUser({ email, password }, onSuccess, onError))
+});
+
+export default connect(null, mapDispatchToProps)(Login);

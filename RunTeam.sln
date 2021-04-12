@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunTeam.Infrastructure.Pers
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunTeam.Infrastructure.Shared", "RunTeam\RunTeam.Infrastructure.Shared\RunTeam.Infrastructure.Shared.csproj", "{6E50AA40-87F6-4565-A55A-1E4F655F262D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunTeam.Api", "RunTeam\RunTeam.Api\RunTeam.Api.csproj", "{5507B657-60BA-4935-8E6F-36C0A20F9F0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunTeam.Api", "RunTeam\RunTeam.Api\RunTeam.Api.csproj", "{5507B657-60BA-4935-8E6F-36C0A20F9F0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

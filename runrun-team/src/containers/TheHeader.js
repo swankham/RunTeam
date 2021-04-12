@@ -1,5 +1,6 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, connect } from 'react-redux'
+
 import {
   CHeader,
   CToggler,
@@ -55,24 +56,23 @@ const TheHeader = () => {
 
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3" >
-          <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
+          <CHeaderNavLink to="/Dashboard">หน้าหลัก</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem  className="px-3">
-          <CHeaderNavLink to="/users">Users</CHeaderNavLink>
+          <CHeaderNavLink to="/register">ลงทะเบียน</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink>Settings</CHeaderNavLink>
+          <CHeaderNavLink to="/login">เข้าสู่ระบบ</CHeaderNavLink>
         </CHeaderNavItem>
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        {/* <TheHeaderDropdownNotif/>
+        <TheHeaderDropdownNotif/>
         <TheHeaderDropdownTasks/>
-        <TheHeaderDropdownMssg/> */}
+        <TheHeaderDropdownMssg/>
         <TheHeaderDropdown/>
       </CHeaderNav>
-
-      {/* <CSubheader className="px-3 justify-content-between">
+      <CSubheader className="px-3 justify-content-between">
         <CBreadcrumbRouter 
           className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
           routes={routes} 
@@ -88,13 +88,13 @@ const TheHeader = () => {
             >
               <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
             </CLink>
-            <CLink className="c-subheader-nav-link" href="#">
+            {/* <CLink className="c-subheader-nav-link" href="#">
               <CIcon name="cil-settings" alt="Settings" />&nbsp;Settings
-            </CLink>
+            </CLink> */}
           </div>
-      </CSubheader> */}
+      </CSubheader>
     </CHeader>
   )
 }
 
-export default TheHeader
+export default TheHeader;

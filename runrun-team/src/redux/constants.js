@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://localhost:44351';
+export const BASE_URL = 'https://localhost:5001';
 
 export const API = 'API';
 export const SET_USER_INFO = 'SET_USER_INFO';

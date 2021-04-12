@@ -1,9 +1,10 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RunTeam.Infrastructure.Persistence.Migrations
 {
-    public partial class Addregistertables : Migration
+    public partial class Initail : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,15 +13,15 @@ namespace RunTeam.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreatedBy = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModified = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
-                    Privince = table.Column<string>(nullable: true),
-                    Country = table.Column<int>(nullable: false),
+                    Province = table.Column<string>(nullable: true),
+                    CountryId = table.Column<int>(nullable: false),
                     Phone = table.Column<string>(nullable: true),
                     PostalCode = table.Column<string>(nullable: true),
                     EmailAddress = table.Column<string>(nullable: true)
@@ -35,7 +36,7 @@ namespace RunTeam.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreatedBy = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
@@ -49,11 +50,38 @@ namespace RunTeam.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    LastModified = table.Column<DateTime>(nullable: true),
+                    EventCode = table.Column<string>(nullable: true),
+                    EventName = table.Column<string>(nullable: true),
+                    RegistrationStartDate = table.Column<DateTime>(nullable: false),
+                    RegistrationEndDate = table.Column<DateTime>(nullable: false),
+                    EventStartDate = table.Column<DateTime>(nullable: false),
+                    EventEndDate = table.Column<DateTime>(nullable: false),
+                    EnableFlag = table.Column<bool>(nullable: false),
+                    OnlineFlag = table.Column<bool>(nullable: false),
+                    EventDescription = table.Column<string>(nullable: true),
+                    RegistrationStatus = table.Column<int>(nullable: false),
+                    EventOwner = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MedicalInfos",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreatedBy = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
@@ -74,7 +102,7 @@ namespace RunTeam.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreatedBy = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
@@ -97,6 +125,41 @@ namespace RunTeam.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_PersonalDetails", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    LastModified = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    EnableFlag = table.Column<bool>(nullable: false),
+                    StartActiveDate = table.Column<DateTime>(nullable: false),
+                    EndActiveDate = table.Column<DateTime>(nullable: false),
+                    CutOffTimeMin = table.Column<int>(nullable: false),
+                    Segment1 = table.Column<string>(nullable: true),
+                    Segment2 = table.Column<string>(nullable: true),
+                    Segment3 = table.Column<string>(nullable: true),
+                    Segment4 = table.Column<string>(nullable: true),
+                    Segment5 = table.Column<string>(nullable: true),
+                    ShippableItemFlag = table.Column<bool>(nullable: false),
+                    CustomerOrderFlag = table.Column<bool>(nullable: false),
+                    ServiceItemFlag = table.Column<bool>(nullable: false),
+                    ItemCatalogId = table.Column<int>(nullable: false),
+                    PricePerUnit = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
+                    PrimaryUomCode = table.Column<string>(nullable: true),
+                    RegistrationStatus = table.Column<int>(nullable: false),
+                    EventId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -108,10 +171,16 @@ namespace RunTeam.Infrastructure.Persistence.Migrations
                 name: "Countries");
 
             migrationBuilder.DropTable(
+                name: "Events");
+
+            migrationBuilder.DropTable(
                 name: "MedicalInfos");
 
             migrationBuilder.DropTable(
                 name: "PersonalDetails");
+
+            migrationBuilder.DropTable(
+                name: "Products");
         }
     }
 }

@@ -24,7 +24,7 @@ namespace RunTeam.Infrastructure.Persistence
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlServer(
+               options.UseMySql(
                    configuration.GetConnectionString("DefaultConnection"),
                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
             }

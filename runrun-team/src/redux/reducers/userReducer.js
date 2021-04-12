@@ -4,7 +4,9 @@ const defualtState = {
     userId: null,
     fullName: null,
     token: null,
-    isLoggedIn: false
+    isLoggedIn: false,
+    sidebarShow: 'responsive',
+    roles:[]
 };
 
 const userInfo = localStorage.getItem('USER_INFO');
