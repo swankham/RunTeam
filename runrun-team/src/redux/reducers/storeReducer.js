@@ -1,8 +1,3 @@
-import { createStore } from 'redux'
-
-// import rootReducer from './reducers';
-// import { apiMiddleware } from './redux/middlewares';
-
 const initialState = {
   sidebarShow: 'responsive'
 }
@@ -16,5 +11,4 @@ const changeState = (state = initialState, { type, ...rest }) => {
   }
 }
 
-const store = createStore(changeState);
-export default store
+export default changeState

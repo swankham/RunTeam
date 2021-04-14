@@ -14,5 +14,7 @@ namespace RunTeam.Application.DTOs.Account
         public string JWToken { get; set; }
         [JsonIgnore]
         public string RefreshToken { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

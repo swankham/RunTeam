@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { connect, useSelector } from 'react-redux';
 import {
   CBadge,
   CDropdown,
@@ -6,10 +7,22 @@ import {
   CDropdownMenu,
   CDropdownToggle,
   CImg
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+} from '@coreui/react';
+import CIcon from '@coreui/icons-react';
+import { logoutUser } from './../redux/actions/authActionCreators';
+// import { Redirect } from 'react-router-dom';
 
-const TheHeaderDropdown = () => {
+
+const TheHeaderDropdown = ({ dispatchLogoutAction }) => {
+
+  const isLogIn = useSelector(state => state.user.isLoggedIn)
+
+  const logoutUser = () => {
+    //e.preventDefault();
+    dispatchLogoutAction();
+    console.log("LogOut Completed.")
+  };
+
   return (
     <CDropdown
       inNav
@@ -19,7 +32,7 @@ const TheHeaderDropdown = () => {
       <CDropdownToggle className="c-header-nav-link" caret={false}>
         <div className="c-avatar">
           <CImg
-            src={'avatars/6.jpg'}
+            src={'/avatars/6.jpg'}
             className="c-avatar-img"
             alt="admin@bootstrapmaster.com"
           />
@@ -32,27 +45,16 @@ const TheHeaderDropdown = () => {
           color="light"
           className="text-center"
         >
-          <strong>Account</strong>
+          {/* <strong>Account</strong> */}
         </CDropdownItem>
         <CDropdownItem>
           <CIcon name="cil-bell" className="mfe-2" />
-          Updates
-          <CBadge color="info" className="mfs-auto">42</CBadge>
+          หน้าหลัก
         </CDropdownItem>
         <CDropdownItem>
           <CIcon name="cil-envelope-open" className="mfe-2" />
-          Messages
+          อีเว้นทั้งหมด
           <CBadge color="success" className="mfs-auto">42</CBadge>
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-task" className="mfe-2" />
-          Tasks
-          <CBadge color="danger" className="mfs-auto">42</CBadge>
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-comment-square" className="mfe-2" />
-          Comments
-          <CBadge color="warning" className="mfs-auto">42</CBadge>
         </CDropdownItem>
         <CDropdownItem
           header
@@ -60,33 +62,41 @@ const TheHeaderDropdown = () => {
           color="light"
           className="text-center"
         >
-          <strong>Settings</strong>
+        {isLogIn ? <strong>ตั้งค่า</strong> : ""}
         </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-user" className="mfe-2" />Profile
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-settings" className="mfe-2" />
-          Settings
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-credit-card" className="mfe-2" />
-          Payments
-          <CBadge color="secondary" className="mfs-auto">42</CBadge>
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-file" className="mfe-2" />
-          Projects
-          <CBadge color="primary" className="mfs-auto">42</CBadge>
-        </CDropdownItem>
-        <CDropdownItem divider />
-        <CDropdownItem>
-          <CIcon name="cil-lock-locked" className="mfe-2" />
-          Lock Account
-        </CDropdownItem>
+        {isLogIn ?
+          <div>
+            <CDropdownItem>
+              <CIcon name="cil-user" className="mfe-2" />
+                โปรไฟล์
+              </CDropdownItem>
+            <CDropdownItem>
+              <CIcon name="cil-credit-card" className="mfe-2" />
+                อีเว้นของฉัน
+                <CBadge color="secondary" className="mfs-auto">42</CBadge>
+            </CDropdownItem>
+            <CDropdownItem divider />
+            <CDropdownItem >
+              <CIcon name="cil-settings" className="mfe-2" />
+                เปลี่ยนรหัสผ่าน
+              </CDropdownItem>
+            <CDropdownItem onClick={logoutUser} href="/">
+              <CIcon name="cil-lock-locked" className="mfe-2" />
+                ออกจากระบบ
+              </CDropdownItem>
+          </div> : <div><CDropdownItem to="/login">
+              <CIcon name="cil-lock-locked" className="mfe-2" />
+                เข้าสู่ระบบ
+              </CDropdownItem></div>
+        }
       </CDropdownMenu>
     </CDropdown>
   )
 }
 
-export default TheHeaderDropdown
+// const mapStateToProps = (state) => ({ user: state.user });
+const mapDispatchToProps = dispatch => ({
+  dispatchLogoutAction: () => dispatch(logoutUser())
+});
+
+export default connect(null, mapDispatchToProps)(TheHeaderDropdown);

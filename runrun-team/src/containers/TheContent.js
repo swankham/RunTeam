@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import {
-  Redirect,
+  //Redirect,
   Route,
   Switch
 } from 'react-router-dom'

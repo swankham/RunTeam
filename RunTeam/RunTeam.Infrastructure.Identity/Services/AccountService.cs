@@ -76,6 +76,8 @@ namespace RunTeam.Infrastructure.Identity.Services
             response.IsVerified = user.EmailConfirmed;
             var refreshToken = GenerateRefreshToken(ipAddress);
             response.RefreshToken = refreshToken.Token;
+            response.FirstName = user.FirstName;
+            response.LastName = user.LastName;
             return new Response<AuthenticationResponse>(response, $"Authenticated {user.UserName}");
         }
 
@@ -91,7 +93,7 @@ namespace RunTeam.Infrastructure.Identity.Services
                 Email = request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                UserName = request.Email,//Original : request.UserName,
+                UserName = request.Email, //request.UserName,
                 EmailConfirmed = true
             };
             var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);

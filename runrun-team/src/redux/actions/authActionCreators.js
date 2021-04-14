@@ -39,6 +39,8 @@ const setUserInfo = (data) =>{
         email: data.data.email,
         userName: data.data.userName,
         token: data.data.jwToken,
+        firstName: data.data.firstName,
+        lastName: data.data.lastName,
         isLoggedIn: true,
         roles: data.data.roles
     };

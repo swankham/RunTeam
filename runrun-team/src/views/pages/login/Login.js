@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -8,6 +8,7 @@ import {
   CCard,
   CCardBody,
   CCardGroup,
+  CHeaderBrand,
   CCol,
   CContainer,
   CForm,
@@ -20,25 +21,31 @@ import {
 import CIcon from '@coreui/icons-react';
 import { loginUser } from './../../../redux/actions/authActionCreators';
 
-const Login = ({ dispatchLoginAction }) => {
+const Login = ({ user, dispatchLoginAction }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // eslint-disable-next-line
   const [error, setError] = useState({ email: false, password: false });
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
     if (isFormInvalid()) updateErrorFlags();
     else dispatchLoginAction(email, password,
-      () => toast.success('Logged in successfully'),
+      () => {
+        //toast.success('Logged in successfully');      
+      },
       (message) => toast.error(`Error: ${message}`))
   };
 
-  const handleCancelForm = e => {
-    e.preventDefault();
-    setEmail('');
-    setPassword('');
-    setError({ email: false, password: false });
-  };
+  let redirect;
+  if (user.isLoggedIn) {
+    let data = user.roles.filter(role => role === "Admin");
+    if (data.length > 0) {
+      redirect = <Redirect to="/Dashboard" />;
+    } else redirect = <Redirect to="/base/carousels" />;
+  } else {
+    redirect = "";
+  }
 
   const isFormInvalid = () => (!email || !password);
 
@@ -58,8 +65,8 @@ const Login = ({ dispatchLoginAction }) => {
               <CCard className="p-4">
                 <CCardBody>
                   <CForm>
-                    <h1>Login</h1>
-                    <p className="text-muted">Sign In to your account</p>
+                    <h1>เข้าสู่ระบบ</h1>
+                    <p className="text-muted">ยินดีต้อนรับเข้าสู่ รันรันทีม</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
@@ -68,7 +75,7 @@ const Login = ({ dispatchLoginAction }) => {
                       </CInputGroupPrepend>
                       <CInput
                         type="email"
-                        placeholder="Username"
+                        placeholder="อีเมล์"
                         autoComplete="username"
                         onChange={(e) => setEmail(e.target.value)}
                         value={email} />
@@ -81,7 +88,7 @@ const Login = ({ dispatchLoginAction }) => {
                       </CInputGroupPrepend>
                       <CInput
                         type="password"
-                        placeholder="Password"
+                        placeholder="รหัสผ่าน"
                         autoComplete="current-password"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password} />
@@ -89,11 +96,11 @@ const Login = ({ dispatchLoginAction }) => {
                     <CRow>
                       <CCol xs="6">
                         {/* <CButton type="submit" color="primary" className="px-4">Login</CButton> */}
-                        <CButton type="submit" size="sm" color="primary" onClick={handleOnSubmit}><CIcon name="cil-scrubber" /> Login</CButton>
+                        <CButton type="submit" size="sm" color="primary" onClick={handleOnSubmit}><CIcon name="cil-scrubber" /> เข้าสู่ระบบ</CButton>
                       </CCol>
-                      <CCol xs="6" className="text-right">
+                      {/* <CCol xs="6" className="text-right">
                         <CButton color="link" className="px-0">Forgot password?</CButton>
-                      </CCol>
+                      </CCol> */}
                     </CRow>
                   </CForm>
                 </CCardBody>
@@ -101,11 +108,10 @@ const Login = ({ dispatchLoginAction }) => {
               <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
                   <div>
-                    <h2>Sign up</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.</p>
+                    <h2>มาเป็นส่วนหนึ่งกับเรา</h2>
+                    {/* <p>เพื่อความสะดวก ทางเราได้ทำการจัดเก็บข้อมูลของท่านที่ได้กรอกรายละเอียดในระบบที่มีความปลอดภัย โดยถือว่าเป็นสิทธิและกรรมสิทธิ์ของเรา รวมไปถึงเบอร์ IP Address และวันเวลาที่ท่านได้เข้ามาใช้บริการด้วย</p> */}
                     <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
+                      <CButton color="primary" className="mt-3" active tabIndex={-1}>สมัครสมาชิก ตอนนี้!</CButton>
                     </Link>
                   </div>
                 </CCardBody>
@@ -114,13 +120,15 @@ const Login = ({ dispatchLoginAction }) => {
           </CCol>
         </CRow>
       </CContainer>
+      {redirect}
     </div>
   )
 }
 
+const mapStateToProps = (state) => ({ user: state.user });
 const mapDispatchToProps = dispatch => ({
   dispatchLoginAction: (email, password, onSuccess, onError) =>
     dispatch(loginUser({ email, password }, onSuccess, onError))
 });
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

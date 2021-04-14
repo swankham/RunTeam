@@ -5,7 +5,8 @@ const defualtState = {
     fullName: null,
     token: null,
     isLoggedIn: false,
-    sidebarShow: 'responsive',
+    firstName: null,
+    lastName: null,
     roles:[]
 };
 

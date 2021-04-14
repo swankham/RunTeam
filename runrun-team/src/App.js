@@ -1,13 +1,13 @@
 // eslint-disable-next-line
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+// import { connect } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
 
 import { ToastContainer, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { logoutUser } from './redux/actions/authActionCreators';
+//import { logoutUser } from './redux/actions/authActionCreators';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -24,9 +24,9 @@ const Register = React.lazy(() => import('./views/pages/register/Register'));
 const Page404 = React.lazy(() => import('./views/pages/page404/Page404'));
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
 
-const App = ({ user, dispatchLogoutAction }) => {
+const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <ToastContainer position="top-right" autoClose={1000}
         hideProgressBar transition={Slide} />
       <React.Suspense fallback={loading}>
@@ -38,14 +38,8 @@ const App = ({ user, dispatchLogoutAction }) => {
           <Route path="/" name="Home" render={props => <TheLayout {...props} />} />
         </Switch>
       </React.Suspense>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
-
-const mapStateToProps = (state) => ({ user: state.user });
-const mapDispatchToProps = (dispatch) => ({
-  dispatchLogoutAction: () => dispatch(logoutUser())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

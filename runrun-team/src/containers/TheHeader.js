@@ -8,34 +8,45 @@ import {
   CHeaderNav,
   CHeaderNavItem,
   CHeaderNavLink,
-  CSubheader,
-  CBreadcrumbRouter,
-  CLink
+  //CSubheader,
+  //CBreadcrumbRouter,
+  // CLink
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
 // routes config
-import routes from '../routes'
+//import routes from '../routes'
+import { logoutUser } from './../redux/actions/authActionCreators';
 
-import { 
+import {
   TheHeaderDropdown,
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks
-}  from './index'
+  // TheHeaderDropdownMssg,
+  // TheHeaderDropdownNotif,
+  // TheHeaderDropdownTasks
+} from './index'
 
-const TheHeader = () => {
+const TheHeader = ({ user, dispatchLogoutAction }) => {
   const dispatch = useDispatch()
-  const sidebarShow = useSelector(state => state.sidebarShow)
+  const sidebarShow = useSelector(state => state.store.sidebarShow)
 
   const toggleSidebar = () => {
     const val = [true, 'responsive'].includes(sidebarShow) ? false : 'responsive'
-    dispatch({type: 'set', sidebarShow: val})
+    dispatch({ type: 'set', sidebarShow: val })
   }
 
   const toggleSidebarMobile = () => {
     const val = [false, 'responsive'].includes(sidebarShow) ? true : 'responsive'
-    dispatch({type: 'set', sidebarShow: val})
+    dispatch({ type: 'set', sidebarShow: val })
+  }
+
+  let userLogin;
+  if (user.isLoggedIn) {
+    let data = user.roles.filter(role => role === "Admin");
+    if (data.length > 0) {
+      userLogin = <h6>Administrator</h6>;
+    } else userLogin = "";
+  } else {
+    userLogin = "";
   }
 
   return (
@@ -51,50 +62,63 @@ const TheHeader = () => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CIcon name="logo" height="48" alt="Logo"/>
+        <CIcon name="logo" height="48" alt="Logo" />
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3" >
           <CHeaderNavLink to="/Dashboard">หน้าหลัก</CHeaderNavLink>
         </CHeaderNavItem>
-        <CHeaderNavItem  className="px-3">
-          <CHeaderNavLink to="/register">ลงทะเบียน</CHeaderNavLink>
+        <CHeaderNavItem className="px-3">
+          <CHeaderNavLink to="/">อีเว้นทั้งหมด</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/login">เข้าสู่ระบบ</CHeaderNavLink>
+          {!user.isLoggedIn ?
+            <CHeaderNavLink to="/">สมัครสมาชิก</CHeaderNavLink> : ""
+          }
+        </CHeaderNavItem>
+        <CHeaderNavItem className="px-3">
+          {!user.isLoggedIn ?
+            <CHeaderNavLink to="/login">เข้าสู่ระบบ</CHeaderNavLink> : ""
+          }
         </CHeaderNavItem>
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <TheHeaderDropdownNotif/>
-        <TheHeaderDropdownTasks/>
-        <TheHeaderDropdownMssg/>
-        <TheHeaderDropdown/>
+        {userLogin}
+        {/* <TheHeaderDropdownNotif />
+        <TheHeaderDropdownTasks />
+        <TheHeaderDropdownMssg /> */}
+        <TheHeaderDropdown />
       </CHeaderNav>
-      <CSubheader className="px-3 justify-content-between">
-        <CBreadcrumbRouter 
-          className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
-          routes={routes} 
+      {/*<CSubheader className="px-3 justify-content-between">
+        <CBreadcrumbRouter
+          className="border-0 c-subheader-nav m-0 px-0 px-md-3"
+          routes={routes}
         />
-          <div className="d-md-down-none mfe-2 c-subheader-nav">
-            <CLink className="c-subheader-nav-link"href="#">
-              <CIcon name="cil-speech" alt="Settings" />
+        <div className="d-md-down-none mfe-2 c-subheader-nav">
+          <CLink className="c-subheader-nav-link" href="#">
+            <CIcon name="cil-speech" alt="Settings" />
+          </CLink>
+          <CLink
+            className="c-subheader-nav-link"
+            aria-current="page"
+            to="/dashboard"
+          >
+            <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
             </CLink>
-            <CLink 
-              className="c-subheader-nav-link" 
-              aria-current="page" 
-              to="/dashboard"
-            >
-              <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
-            </CLink>
-            {/* <CLink className="c-subheader-nav-link" href="#">
+           <CLink className="c-subheader-nav-link" href="#">
               <CIcon name="cil-settings" alt="Settings" />&nbsp;Settings
-            </CLink> */}
-          </div>
-      </CSubheader>
+            </CLink> 
+        </div>
+      </CSubheader>*/}
     </CHeader>
   )
 }
 
-export default TheHeader;
+const mapStateToProps = (state) => ({ user: state.user });
+const mapDispatchToProps = (dispatch) => ({
+  dispatchLogoutAction: () => dispatch(logoutUser())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TheHeader);
