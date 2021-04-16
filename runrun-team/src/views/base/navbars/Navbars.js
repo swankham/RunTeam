@@ -35,7 +35,7 @@ const CNavbars = () => {
           <DocsLink name="CNavbar"/>
         </CCardHeader>
         <CCardBody>
-          <CNavbar expandable="sm" color="info" >
+          <CNavbar expandable="sm" color="info">
             <CToggler inNavbar onClick={() => setIsOpen(!isOpen)}/>
             <CNavbarBrand>
               NavbarBrand

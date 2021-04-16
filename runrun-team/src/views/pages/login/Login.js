@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -8,7 +8,7 @@ import {
   CCard,
   CCardBody,
   CCardGroup,
-  CHeaderBrand,
+  // CHeaderBrand,
   CCol,
   CContainer,
   CForm,
@@ -57,16 +57,16 @@ const Login = ({ user, dispatchLoginAction }) => {
   };
 
   return (
-    <div className="c-app c-default-layout flex-row align-items-center">
+    <>
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md="8">
+          <CCol md="6">
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
                   <CForm>
                     <h1>เข้าสู่ระบบ</h1>
-                    <p className="text-muted">ยินดีต้อนรับเข้าสู่ รันรันทีม</p>
+                    <p className="text-muted">ยินดีต้อนรับเข้าสู่ RunRun Team</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
@@ -94,9 +94,10 @@ const Login = ({ user, dispatchLoginAction }) => {
                         value={password} />
                     </CInputGroup>
                     <CRow>
-                      <CCol xs="6">
+                      <CCol xs="12" className="row justify-content-md-center">
                         {/* <CButton type="submit" color="primary" className="px-4">Login</CButton> */}
-                        <CButton type="submit" size="sm" color="primary" onClick={handleOnSubmit}><CIcon name="cil-scrubber" /> เข้าสู่ระบบ</CButton>
+                        {/* <CButton type="submit" size="sm" color="primary" onClick={handleOnSubmit}><CIcon name="cil-scrubber" /> เข้าสู่ระบบ</CButton> */}
+                        <CButton size="lg" className="btn-instagram btn-brand mr-1 mb-1" onClick={handleOnSubmit}><span className="mfs-2">เข้าสู่ระบบ</span></CButton>
                       </CCol>
                       {/* <CCol xs="6" className="text-right">
                         <CButton color="link" className="px-0">Forgot password?</CButton>
@@ -104,24 +105,13 @@ const Login = ({ user, dispatchLoginAction }) => {
                     </CRow>
                   </CForm>
                 </CCardBody>
-              </CCard>
-              <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
-                <CCardBody className="text-center">
-                  <div>
-                    <h2>มาเป็นส่วนหนึ่งกับเรา</h2>
-                    {/* <p>เพื่อความสะดวก ทางเราได้ทำการจัดเก็บข้อมูลของท่านที่ได้กรอกรายละเอียดในระบบที่มีความปลอดภัย โดยถือว่าเป็นสิทธิและกรรมสิทธิ์ของเรา รวมไปถึงเบอร์ IP Address และวันเวลาที่ท่านได้เข้ามาใช้บริการด้วย</p> */}
-                    <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>สมัครสมาชิก ตอนนี้!</CButton>
-                    </Link>
-                  </div>
-                </CCardBody>
-              </CCard>
+              </CCard>          
             </CCardGroup>
           </CCol>
         </CRow>
       </CContainer>
       {redirect}
-    </div>
+    </>
   )
 }
 
