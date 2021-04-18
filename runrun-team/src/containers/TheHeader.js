@@ -55,8 +55,8 @@ const TheHeader = ({ user, dispatchLogoutAction }) => {
   }
 
   return (
-    // <CHeader withSubheader className="bg-gray-100">
-    <CNavbar expandable="sm" className="navbar navbar-light bg-dark" style={{ padding: '0' }}>
+    // <CHeader withSubheader className="bg-gray-100">style={{  }}
+    <CNavbar expandable="sm" className="navbar navbar-light bg-white" style={{ padding: '0', boxShadow: '0 0 15px 1px rgb(0 0 0 / 40%)'}}>
       {/* <CToggler
           inHeader
           className="ml-md-3 d-lg-none"
@@ -75,12 +75,12 @@ const TheHeader = ({ user, dispatchLogoutAction }) => {
 
       <CCollapse show={isOpen} navbar>
         <CNavbarNav>
-          <CNavLink to="/Dashboard" style={{ paddingRight: '1rem', paddingLeft: '1rem', color: 'white', fontWeight: 600 }}>หน้าหลัก</CNavLink>
-          <CNavLink to="/Dashboard" style={{ paddingRight: '1rem', paddingLeft: '1rem', color: 'white', fontWeight: 600 }}>อีเว้นทั้งหมด</CNavLink>
+          <CNavLink to="/Dashboard" style={{ paddingRight: '1rem', paddingLeft: '1rem', color: 'gray', fontWeight: 600 }}>หน้าหลัก</CNavLink>
+          <CNavLink to="/Dashboard" style={{ paddingRight: '1rem', paddingLeft: '1rem', color: 'gray', fontWeight: 600 }}>อีเว้นทั้งหมด</CNavLink>
           {!user.isLoggedIn ?
             <>
-              <CNavLink to="/Register" style={{ paddingRight: '1rem', paddingLeft: '1rem', color: 'white', fontWeight: 600 }}>สมัครสมาชิก</CNavLink>
-              <CNavLink to="/login" style={{ paddingRight: '1rem', paddingLeft: '1rem', color: 'white', fontWeight: 600 }}>เข้าสู่ระบบ</CNavLink>
+              <CNavLink to="/Register" style={{ paddingRight: '1rem', paddingLeft: '1rem', color: 'gray', fontWeight: 600 }}>สมัครสมาชิก</CNavLink>
+              <CNavLink to="/login" style={{ paddingRight: '1rem', paddingLeft: '1rem', color: 'gray', fontWeight: 600 }}>เข้าสู่ระบบ</CNavLink>
             </>
             : ""
           }
@@ -96,7 +96,7 @@ const TheHeader = ({ user, dispatchLogoutAction }) => {
         </CHeaderNav> */}
         {user.isLoggedIn ?
           <CDropdown style={{ paddingRight: '1rem', paddingLeft: '1rem' }}>
-            <CDropdownToggle style={{ paddingRight: '1rem', paddingLeft: '1rem', color: 'white', fontWeight: 600 }}>
+            <CDropdownToggle style={{ paddingRight: '1rem', paddingLeft: '1rem', color: 'gray', fontWeight: 600 }}>
               {userLogin}
             </CDropdownToggle>
             <CDropdownMenu>

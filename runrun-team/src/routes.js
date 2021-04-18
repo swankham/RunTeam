@@ -41,6 +41,9 @@ const User = React.lazy(() => import('./views/users/User'));
 const Login = React.lazy(() => import('./views/pages/login/Login'));
 const Register = React.lazy(() => import('./views/pages/register/Register'));
 
+const Events = React.lazy(() => import('./views/events/Events'));
+const NewEvent = React.lazy(() => import('./views/events/NewEvent'));
+
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
@@ -83,7 +86,9 @@ const routes = [
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   { path: '/login', exact: true, name: 'User Details', component: Login },
-  { path: '/register', exact: true, name: 'User Details', component: Register }
+  { path: '/register', exact: true, name: 'User Details', component: Register },
+  { path: '/events', exact: true, name: 'All Events', component: Events },
+  { path: '/new-event', exact: true, name: 'Create Event', component: NewEvent },
 ];
 
 export default routes;

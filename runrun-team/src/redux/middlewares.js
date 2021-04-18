@@ -35,12 +35,25 @@ export const apiMiddleware = ({ dispatch, getState }) => next => action => {
 
             if (err.response) {
                 console.log('error response : ', err.response)
+                console.log('error response data : ',err.response.data)
                 if (err.response && err.response.status === 403)
                     dispatch(logoutUser());
                 if (err.response.status === 500)
-                    if (postProcessError) postProcessError('The token is expired. Please logout and refresh page.');
-                if (err.response.data.Message) {
-                    if (postProcessError) postProcessError(!err.response.data.Errors ? err.response.data.Message : err.response.data.Errors);
+                    if (postProcessError) postProcessError('500 Internal Server Error');
+                if (err.response.status === 400){
+                    console.log('error status = 400')
+                    if(err.response.data.Message){
+                        console.log('Message = true')
+                        if (postProcessError) postProcessError(err.response.data.Message);
+                    }                        
+                    else{
+                        if (postProcessError){
+                            postProcessError(err.response.data.title);
+                        }
+                    }
+                }                    
+                if (err.response.data.errors) {                    
+                    if (postProcessError) postProcessError(!err.response.data.errors);// ? err.response.data.Message : err.response.data.errors);
                 }
             }
         })

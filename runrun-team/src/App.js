@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
 
-import { ToastContainer, Slide } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 //import { logoutUser } from './redux/actions/authActionCreators';
@@ -27,8 +27,7 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
 const App = () => {
   return (
     <BrowserRouter>
-      <ToastContainer position="top-right" autoClose={1000}
-        hideProgressBar transition={Slide} />
+      <ToastContainer autoClose={1000}/>
       <React.Suspense fallback={loading}>
         <Switch>
           {/* <Route exact path="/login" name="Login Page" render={props => <Login {...props} />} />

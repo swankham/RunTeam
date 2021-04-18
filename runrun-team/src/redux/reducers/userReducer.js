@@ -10,7 +10,7 @@ const defualtState = {
     roles:[]
 };
 
-const userInfo = localStorage.getItem('USER_INFO');
+const userInfo = localStorage.getItem('USER_INFO_RUNRUN_TEAM');
 const INITIAL_STATE = userInfo ? JSON.parse(userInfo) : defualtState;
 
 export default function userReducer(state = INITIAL_STATE, action){

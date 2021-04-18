@@ -23,6 +23,7 @@ using RunTeam.Application.Enums;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Primitives;
 using RunTeam.Application.DTOs.Email;
+using Microsoft.EntityFrameworkCore;
 
 namespace RunTeam.Infrastructure.Identity.Services
 {
@@ -235,6 +236,34 @@ namespace RunTeam.Infrastructure.Identity.Services
             {
                 throw new ApiException($"Error occured while reseting the password.");
             }
+        }
+
+        public async Task<Response<IEnumerable<AuthenticationResponse>>> GetAllAsync()
+        {
+            IList<ApplicationUser> users = await _userManager.Users.ToListAsync();
+            if (users == null)
+            {
+                throw new ApiException($"Users not found.");
+            }
+
+            var resultView = (from a in users
+                              select new AuthenticationResponse
+                              {
+                                  Id = a.Id,
+                                  Email = a.Email,
+                                  UserName = a.UserName,                                  
+                                  //Roles = _userManager.GetRolesAsync(a).ConfigureAwait(false),
+                                  IsVerified = a.EmailConfirmed,
+                                  FirstName = a.FirstName,
+                                  LastName = a.LastName,
+                                }).ToList();
+
+            return new Response<IEnumerable<AuthenticationResponse>>(resultView);
+        }
+
+        public Task<Response<AuthenticationResponse>> GetByIdAsync(string userId)
+        {
+            throw new NotImplementedException();
         }
     }
 

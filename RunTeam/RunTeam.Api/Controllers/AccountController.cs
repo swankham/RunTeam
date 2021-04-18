@@ -59,9 +59,9 @@ namespace RunTeam.Api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<string> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return new string[] { "New Jersey", "New York" };
+            return Ok(await _accountService.GetAllAsync());
         }
 
         private string GenerateIPAddress()

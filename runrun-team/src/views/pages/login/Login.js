@@ -32,7 +32,7 @@ const Login = ({ user, dispatchLoginAction }) => {
     if (isFormInvalid()) updateErrorFlags();
     else dispatchLoginAction(email, password,
       () => {
-        //toast.success('Logged in successfully');      
+        toast.success('Logged in successfully');      
       },
       (message) => toast.error(`Error: ${message}`))
   };
@@ -62,7 +62,7 @@ const Login = ({ user, dispatchLoginAction }) => {
         <CRow className="justify-content-center">
           <CCol md="6">
             <CCardGroup>
-              <CCard className="p-4">
+              <CCard className="p-4" style={{ boxShadow: '0 0 15px 1px rgb(0 0 0 / 40%)' }}>
                 <CCardBody>
                   <CForm>
                     <h1>เข้าสู่ระบบ</h1>

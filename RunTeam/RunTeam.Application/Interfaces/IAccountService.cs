@@ -11,6 +11,8 @@ namespace RunTeam.Application.Interfaces
     public interface IAccountService
     {
         Task<Response<AuthenticationResponse>> AuthenticateAsync(AuthenticationRequest request, string ipAddress);
+        Task<Response<IEnumerable<AuthenticationResponse>>> GetAllAsync();
+        Task<Response<AuthenticationResponse>> GetByIdAsync(string userId);
         Task<Response<string>> RegisterAsync(RegisterRequest request, string origin);
         Task<Response<string>> ConfirmEmailAsync(string userId, string code);
         Task ForgotPassword(ForgotPasswordRequest model, string origin);
