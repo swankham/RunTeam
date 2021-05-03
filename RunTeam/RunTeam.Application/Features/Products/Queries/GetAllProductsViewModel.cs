@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RunTeam.Application.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -25,6 +26,15 @@ namespace RunTeam.Application.Features.Products.Queries
         public decimal PricePerUnit { get; set; }
         public string PrimaryUomCode { get; set; }
         public int RegistrationStatus { get; set; }
+        public int RegisterLimit { get; set; }
         public int EventId { get; set; }
+        public int RegisterCount { get; set; }
+        public int PaymentCount { get; set; }
+        public string EventName { get; set; }
+
+        public string StatusDesc
+        {
+            get { return (Enum.GetName(typeof(enumProductStatus), RegistrationStatus)); }
+        }
     }
 }

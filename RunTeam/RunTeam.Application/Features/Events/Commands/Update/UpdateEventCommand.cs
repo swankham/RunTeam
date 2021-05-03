@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using RunTeam.Application.Exceptions;
 using RunTeam.Application.Interfaces.Repositories;
 using RunTeam.Application.Wrappers;
@@ -25,6 +26,8 @@ namespace RunTeam.Application.Features.Events.Commands.Update
         public string EventDescription { get; set; }
         public int RegistrationStatus { get; set; }
         public string EventOwner { get; set; }
+        public IFormFile ImageFile { get; set; }
+        public string ImageName { get; set; }
 
         public class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand, Response<EventDay>>
         {
@@ -55,6 +58,7 @@ namespace RunTeam.Application.Features.Events.Commands.Update
                     _contact.EventDescription = command.EventDescription;
                     _contact.RegistrationStatus = command.RegistrationStatus;
                     _contact.EventOwner = command.EventOwner;
+                    _contact.ImageName = command.ImageName;
 
                     await _repository.UpdateAsync(_contact);
                     return new Response<EventDay>(_contact);

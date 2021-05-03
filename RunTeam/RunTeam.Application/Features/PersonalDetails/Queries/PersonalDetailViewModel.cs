@@ -25,5 +25,16 @@ namespace RunTeam.Application.Features.PersonalDetails.Queries
         {
             get { return (Enum.GetName(typeof(enumGender), Gender)); }
         }
+        public string Address { get; set; }
+        public string Province { get; set; }
+        public int CountryId { get; set; }
+        public string Phone { get; set; }
+        public string PostalCode { get; set; }
+        public string EmailAddress { get; set; }
+        public string HealthIssues { get; set; }
+        public string BloodGroup { get; set; }
+        public string EmergencyContact { get; set; }
+        public string EmergencyPhone { get; set; }
+        public string ImageName { get; set; }
     }
 }

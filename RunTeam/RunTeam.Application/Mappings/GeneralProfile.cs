@@ -21,6 +21,10 @@ using RunTeam.Application.Features.Events.Commands.Create;
 using RunTeam.Application.Features.Events.Queries.GetAll;
 using RunTeam.Application.Features.Events.Queries;
 using RunTeam.Application.Features.Products.Queries;
+using RunTeam.Application.Features.OrderHeads.Commands.Create;
+using RunTeam.Application.Features.OrderLines.Queries;
+using RunTeam.Application.Features.OrderLines.Commands.Create;
+using RunTeam.Application.Features.OrderHeads.Queries;
 
 namespace RunTeam.Application.Mappings
 {
@@ -51,6 +55,12 @@ namespace RunTeam.Application.Mappings
             CreateMap<EventDay, EventsViewModel>().ReverseMap();
             CreateMap<CreateEventCommand, EventDay>();
             CreateMap<GetAllEventsQuery, GetAllEventsParameter>();
+
+            CreateMap<OrderHead, OrderHeadViewModel>().ReverseMap();
+            CreateMap<CreateOrderHeadCommand, OrderHead>();
+
+            CreateMap<OrderLine, OrderLineViewModel>().ReverseMap();
+            CreateMap<CreateOrderLineCommand, OrderLine>();
         }
     }
 }

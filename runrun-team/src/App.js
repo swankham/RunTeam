@@ -7,8 +7,6 @@ import './scss/style.scss';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-//import { logoutUser } from './redux/actions/authActionCreators';
-
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>

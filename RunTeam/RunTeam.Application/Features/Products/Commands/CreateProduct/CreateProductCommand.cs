@@ -29,6 +29,7 @@ namespace RunTeam.Application.Features.Products.Commands.CreateProduct
         public decimal PricePerUnit { get; set; }
         public string PrimaryUomCode { get; set; }
         public int RegistrationStatus { get; set; }
+        public int RegisterLimit { get; set; }
         public int EventId { get; set; }
     }
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Response<int>>

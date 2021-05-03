@@ -4,7 +4,7 @@ export const fetchAllEvents = (data, onSuccess, onError) => ({
     type: constants.API,
     payload: {
         method: 'GET',
-        url: '/api/v1.0/Event',
+        url: '/api/v1/Event',
         data,
         success: (response) => (setAllEvents(response)),
         postProcessSuccess: onSuccess,
@@ -16,7 +16,7 @@ export const createEvent = (data, onSuccess, onError) => ({
     type: constants.API,
     payload: {
         method: 'POST',
-        url: '/api/v1.0/Event',
+        url: '/api/v1/Event',
         data,
         success: (data) => (addEvent(data)),
         postProcessSuccess: onSuccess,
