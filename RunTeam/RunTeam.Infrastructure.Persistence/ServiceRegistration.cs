@@ -37,6 +37,8 @@ namespace RunTeam.Infrastructure.Persistence
             services.AddTransient<IMedicalInfoRepositoryAsync, MedicalInfoRepositoryAsync>();
             services.AddTransient<ICountryRepositoryAsync, CountryRepositoryAsync>();
             services.AddTransient<IEventRepositoryAsync, EventRepositoryAsync>();
+            services.AddTransient<IOrderHeadRepositoryAsync, OrderHeadRepositoryAsync>();
+            services.AddTransient<IOrderLineRepositoryAsync, OrderLineRepositoryAsync>();
             #endregion
         }
     }

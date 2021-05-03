@@ -31,6 +31,7 @@ namespace RunTeam.Application.Features.Products.Commands.UpdateProduct
         public decimal PricePerUnit { get; set; }
         public string PrimaryUomCode { get; set; }
         public int RegistrationStatus { get; set; }
+        public int RegisterLimit { get; set; }
         public int EventId { get; set; }
         public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Response<int>>
         {
@@ -52,8 +53,8 @@ namespace RunTeam.Application.Features.Products.Commands.UpdateProduct
                     product.Name = command.Name;
                     product.Description = command.Description;
                     product.EnableFlag = command.EnableFlag;
-                    product.StartActiveDate = command.StartActiveDate;
-                    product.EndActiveDate = command.EndActiveDate;
+                    product.StartActiveDate = command.StartActiveDate.AddMinutes(1);
+                    product.EndActiveDate = command.EndActiveDate.AddMinutes(1);
                     product.CutOffTimeMin = command.CutOffTimeMin;
                     product.Segment1 = command.Segment1;
                     product.Segment2 = command.Segment2;
@@ -67,6 +68,7 @@ namespace RunTeam.Application.Features.Products.Commands.UpdateProduct
                     product.PricePerUnit = command.PricePerUnit;
                     product.PrimaryUomCode = command.PrimaryUomCode;
                     product.RegistrationStatus = command.RegistrationStatus;
+                    product.RegisterLimit = command.RegisterLimit;
                     product.EventId = command.EventId;
 
                     await _productRepository.UpdateAsync(product);

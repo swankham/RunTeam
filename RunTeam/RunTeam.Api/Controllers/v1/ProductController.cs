@@ -17,7 +17,7 @@ namespace RunTeam.Api.Controllers.v1
     {
         // GET: api/<controller>
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetAllProductsParameter filter)
+        public async Task<IActionResult> Get()
         {
             return Ok(await Mediator.Send(new GetAllProductsQuery()));
         }
@@ -38,7 +38,7 @@ namespace RunTeam.Api.Controllers.v1
 
         // POST api/<controller>
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Post(CreateProductCommand command)
         {
             var result = Ok(await Mediator.Send(command));

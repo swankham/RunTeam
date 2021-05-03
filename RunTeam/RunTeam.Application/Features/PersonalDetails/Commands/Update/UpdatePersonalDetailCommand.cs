@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using RunTeam.Application.Exceptions;
 using RunTeam.Application.Interfaces.Repositories;
 using RunTeam.Application.Wrappers;
@@ -27,6 +28,18 @@ namespace RunTeam.Application.Features.PersonalDetails.Commands.Update
         public string LastnameEn { get; set; }
         public DateTime BirthDay { get; set; }
         public int Gender { get; set; }
+        public string Address { get; set; }
+        public string Province { get; set; }
+        public int CountryId { get; set; }
+        public string Phone { get; set; }
+        public string PostalCode { get; set; }
+        public string EmailAddress { get; set; }
+        public string HealthIssues { get; set; }
+        public string BloodGroup { get; set; }
+        public string EmergencyContact { get; set; }
+        public string EmergencyPhone { get; set; }
+        public IFormFile ImageFile { get; set; }
+        public string ImageName { get; set; }
 
         public class UpdatePersonalDetailCommandHandler : IRequestHandler<UpdatePersonalDetailCommand, Response<PersonalDetail>>
         {
@@ -59,6 +72,17 @@ namespace RunTeam.Application.Features.PersonalDetails.Commands.Update
                     _personal.LastnameEn = command.LastnameEn;
                     _personal.BirthDay = command.BirthDay;
                     _personal.Gender = command.Gender;
+                    _personal.Address = command.Address;
+                    _personal.Province = command.Province;
+                    _personal.CountryId = command.CountryId;
+                    _personal.Phone = command.Phone;
+                    _personal.PostalCode = command.PostalCode;
+                    _personal.EmailAddress = command.EmailAddress;
+                    _personal.HealthIssues = command.HealthIssues;
+                    _personal.BloodGroup = command.BloodGroup;
+                    _personal.EmergencyContact = command.EmergencyContact;
+                    _personal.EmergencyPhone = command.EmergencyPhone;
+                    _personal.ImageName = command.ImageName;
 
                     await _repository.UpdateAsync(_personal);
                     return new Response<PersonalDetail>(_personal);

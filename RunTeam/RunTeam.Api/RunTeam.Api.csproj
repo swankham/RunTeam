@@ -38,5 +38,9 @@
     <ProjectReference Include="..\RunTeam.Infrastructure.Shared\RunTeam.Infrastructure.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\avatars\" />
+  </ItemGroup>
+
 
 </Project>

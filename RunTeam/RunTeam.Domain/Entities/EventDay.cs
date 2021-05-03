@@ -18,5 +18,6 @@ namespace RunTeam.Domain.Entities
         public string EventDescription { get; set; }
         public int RegistrationStatus { get; set; }
         public string EventOwner { get; set; }
+        public string ImageName { get; set; }
     }
 }

@@ -29,6 +29,8 @@ namespace RunTeam.Infrastructure.Persistence.Contexts
         public DbSet<MedicalInfo> MedicalInfos { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<EventDay> Events { get; set; }
+        public DbSet<OrderHead> OrderHeaders { get; set; }
+        public DbSet<OrderLine> OrderLines { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

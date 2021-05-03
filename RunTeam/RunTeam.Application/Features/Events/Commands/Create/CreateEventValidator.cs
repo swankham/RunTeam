@@ -18,7 +18,7 @@ namespace RunTeam.Application.Features.Events.Commands.Create
             RuleFor(p => p.EventCode)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull()
-                .MaximumLength(10).WithMessage("{PropertyName} must not exceed 3 characters.")
+                .MaximumLength(10).WithMessage("{PropertyName} must not exceed 10 characters.")
                 .MustAsync(IsUniqueEventCode).WithMessage("{PropertyName} already exists.");
 
             RuleFor(p => p.EventName)

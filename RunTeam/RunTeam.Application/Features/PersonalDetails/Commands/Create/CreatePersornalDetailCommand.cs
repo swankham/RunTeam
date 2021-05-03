@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using RunTeam.Application.Interfaces.Repositories;
 using RunTeam.Application.Wrappers;
 using RunTeam.Domain.Entities;
@@ -26,6 +27,17 @@ namespace RunTeam.Application.Features.PersonalDetails.Commands.Create
         public string LastnameEn { get; set; }
         public DateTime BirthDay { get; set; }
         public int Gender { get; set; }
+        public string Address { get; set; }
+        public string Province { get; set; }
+        public int CountryId { get; set; }
+        public string Phone { get; set; }
+        public string PostalCode { get; set; }
+        public string EmailAddress { get; set; }
+        public string HealthIssues { get; set; }
+        public string BloodGroup { get; set; }
+        public string EmergencyContact { get; set; }
+        public string EmergencyPhone { get; set; }
+        public string ImageName { get; set; }
     }
 
     public class CreatePersornalDetailCommandHandler : IRequestHandler<CreatePersornalDetailCommand, Response<PersonalDetail>>

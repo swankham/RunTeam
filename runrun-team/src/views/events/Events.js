@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
     // CButton,
@@ -17,23 +17,31 @@ import {
 import { fetchAllEvents } from './../../redux/actions/eventActionCreators';
 
 const Events = ({ events, dispatchFetchAllEventsAction }) => {
-    useEffect(() => dispatchFetchAllEventsAction(), [dispatchFetchAllEventsAction])
+    useEffect(() => {dispatchFetchAllEventsAction(); }, [dispatchFetchAllEventsAction])
+
+    const columns = [
+        { field: 'eventCode', header: 'Code' },
+        { field: 'eventName', header: 'Name' },
+        { field: 'registrationStartDate', header: 'StartDate' },
+        { field: 'registrationEndDate', header: 'EndDate' }
+    ];
+
     return (
         <>
             <CContainer>
-                All Events
+
             </CContainer>
         </>
     )
 }
 
-const mapStateToProps = (state) => ({ 
-    events: state.events 
+const mapStateToProps = (state) => ({
+    events: state.event.data
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatchFetchAllEventsAction: () =>
-    dispatch(fetchAllEvents())
+    dispatchFetchAllEventsAction: () =>
+        dispatch(fetchAllEvents())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Events);

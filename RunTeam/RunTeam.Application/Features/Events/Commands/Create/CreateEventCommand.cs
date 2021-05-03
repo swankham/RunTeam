@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using RunTeam.Application.Interfaces.Repositories;
 using RunTeam.Application.Wrappers;
 using RunTeam.Domain.Entities;
@@ -24,6 +25,8 @@ namespace RunTeam.Application.Features.Events.Commands.Create
         public string EventDescription { get; set; }
         public int RegistrationStatus { get; set; }
         public string EventOwner { get; set; }
+        public IFormFile ImageFile { get; set; }
+        public string ImageName { get; set; }
     }
 
     public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Response<EventDay>>
